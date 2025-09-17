@@ -31,14 +31,15 @@ export default function Game() {
   });
 
   return (
-    <div className="game">
-      <div className="game-container">
-        <div className="game-board">
-          <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
-        </div>
-        <div className="game-info">
-          <ol>{moves}</ol>
-        </div>
+     <div className={`game ${theme}`}>
+      {/* Navbar at the top */}
+      <Navbar theme={theme} onToggle={() => setTheme(theme === "light" ? "dark" : "light")} />
+
+      <div className="game-board">
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+      </div>
+      <div className="game-info">
+        <ol>{moves}</ol>
       </div>
     </div>
   );

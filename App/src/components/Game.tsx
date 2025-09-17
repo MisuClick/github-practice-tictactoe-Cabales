@@ -7,6 +7,7 @@ export default function Game() {
     Array(9).fill(null),
   ]);
   const [currentMove, setCurrentMove] = useState(0);
+  const [theme, setTheme] = useState("light");
 
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
@@ -31,14 +32,14 @@ export default function Game() {
   });
 
   return (
-    <div className="game">
-      <div className="game-container">
-        <div className="game-board">
-          <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
-        </div>
-        <div className="game-info">
-          <ol>{moves}</ol>
-        </div>
+     <div className={`game ${theme}`}>
+      <Navbar theme={theme} onToggle={() => setTheme(theme === "light" ? "dark" : "light")} />
+
+      <div className="game-board">
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+      </div>
+      <div className="game-info">
+        <ol>{moves}</ol>
       </div>
     </div>
   );

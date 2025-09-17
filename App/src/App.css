@@ -1,6 +1,4 @@
 body {
-  background-color: #1e1e1e;
-  color: white;
   font-family: Arial, sans-serif;
   height: 100vh;
   margin: 0;
@@ -9,6 +7,27 @@ body {
   /* horizontal center */
   align-items: center;
   /* vertical center */
+}
+
+/* Light mode */
+.game.light {
+  background-color: #f9f9f9;
+  /* light gray background */
+  color: #000;
+}
+
+/* Dark mode */
+.game.dark {
+  background-color: #1e1e1e;
+  /* dark background */
+  color: #fff;
+}
+
+/* Make sure page fills the viewport */
+.game {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .game-container {
@@ -25,36 +44,67 @@ body {
   align-items: center;
 }
 
-.game-info {
-  background: #2b2b2b;
-  padding: 1rem;
-  border-radius: 8px;
+/* Light mode */
+.game.light .game-info {
+  background: #f0f0f0;
+  color: black;
 }
 
-.game-info button {
-  display: block;
-  margin-bottom: 0.5rem;
+.game.light .game-info button {
+  background: #fff;
+  color: black;
+}
+
+.game.light .game-info button:hover {
+  background: #ddd;
+}
+
+.game.light .square {
+  background: #fff;
+  color: black;
+  border: 2px solid #ccc;
+}
+
+/* Dark mode */
+.game.dark .game-info {
+  background: #2b2b2b;
+  color: white;
+}
+
+.game.dark .game-info button {
   background: #444;
   color: white;
-  border: none;
-  padding: 0.5rem;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
-.game-info button:hover {
+.game.dark .game-info button:hover {
   background: #666;
+}
+
+.game.dark .square {
+  background: #2d2d2d;
+  color: white;
+  border: 2px solid #444;
 }
 .square {
   width: 60px;
   height: 60px;
   font-size: 2rem;
   font-weight: bold;
-  background-color: #2d2d2d;
-  border: 2px solid #444;
   border-radius: 10px;
   cursor: pointer;
   transition: background 0.3s;
+}
+
+.square.light {
+  background-color: #ffffff;
+  color: #000;
+  border: 2px solid #ccc;
+}
+
+.square.dark {
+  background-color: #2d2d2d;
+  color: #fff;
+  border: 2px solid #444;
 }
 
 .square:hover {
@@ -84,8 +134,12 @@ button {
   font-size: 14px;
 }
 
-button:hover {
-  background: #666;
+.square:hover.light {
+  background: #ddd;
+}
+
+.square:hover.dark {
+  background: #555;
 }
 
 .status {
@@ -116,4 +170,8 @@ button:hover {
 .game.dark .navbar {
   background: #2b2b2b;
   color: #f5f5f5;
+}
+
+* {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

@@ -32,8 +32,8 @@ body {
 }
 
 .game-board {
-  flex: 2;
-  max-width: 66%;
+  flex: 3;
+  max-width: 75%;
   border-radius: 8px;
   display: flex;
     flex-direction: column;
@@ -58,7 +58,7 @@ body {
 
 .game-info {
   flex: 1;
-  max-width: 33%;
+  max-width: 25%;
   border-radius: 8px;
   padding: 1rem;
 }
@@ -171,10 +171,11 @@ button {
 .navbar {
   width: 100%;
   max-width: 100vw;
+  height: 70px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 0rem 2rem;
   border-bottom: 2px solid #ccc;
   box-sizing: border-box;
 }
@@ -207,16 +208,35 @@ button {
 }
 
 .start-game-container {
-  margin-bottom: 1rem;  /* space between start button and history */
+  margin-bottom: 1rem; 
 }
 
 .start-button {
   font-weight: bold;
-  background-color: #4caf50;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Light mode */
+.game.light .start-button {
+  background-color: #bababa;
   color: white;
 }
 
-.start-button:hover {
+.game.light .start-button:hover {
+  background-color: #45a049;
+}
+
+/* Dark mode */
+.game.dark .start-button {
+  background-color: #4c4c4c;
+  color: white;
+}
+
+.game.dark .start-button:hover {
   background-color: #45a049;
 }
 
@@ -228,6 +248,50 @@ button {
   margin-bottom: 0.5rem;
   border-bottom: 1px solid #888;
   padding-bottom: 0.2rem;
+}
+
+.theme-toggle {
+  width: 10px;
+  height: 10px;
+  border-radius: 42%;
+  border: 2px solid #444;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Light theme: button is dark (off) */
+.theme-toggle.light {
+  background-color: #fff;
+  border-color: #ccc;
+}
+
+/* Dark theme: button is light (on) */
+.theme-toggle.dark {
+  background-color: #444;
+  border-color: #222;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.history-button {
+  padding: 2px 6px;
+  font-size: 1rem;
+  /* slightly bigger for arrow */
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.history-button:hover {
+  background-color: #45a049;
 }
 
 * {

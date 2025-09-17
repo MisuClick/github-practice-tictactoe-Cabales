@@ -20,6 +20,8 @@ export default function Game() {
 
   function jumpTo(nextMove: number) {
     setCurrentMove(nextMove);
+
+    setHistory(prevHistory => prevHistory.slice(0, nextMove + 1));
   }
 
   const startButton = (
@@ -41,21 +43,20 @@ export default function Game() {
     </div>
   );
 
- const moves = history
-  .slice(1) 
-  .map((_, move) => {
-    const moveNumber = move + 1; // adjust index
-    return (
-      <li key={moveNumber}>
-        <button
-          className="history-button"
-          onClick={() => jumpTo(moveNumber)}
-        >
-          Go to move #{moveNumber}
-        </button>
-      </li>
-    );
-  });
+ const moves = history.slice(1).map((_, index) => {
+  const moveNumber = index + 1; // adjust for slice
+  return (
+    <li key={moveNumber} className="history-item flex justify-between items-center mb-1">
+      <span>Move {moveNumber}</span>
+      <button
+        className="history-button"
+        onClick={() => jumpTo(moveNumber)}
+      >
+        &#8594;
+      </button>
+    </li>
+  );
+});
 
   return (
   <div className={`game ${theme}`}>

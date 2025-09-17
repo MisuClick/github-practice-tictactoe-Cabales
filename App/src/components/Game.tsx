@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Board from "./Board";
+import Navbar from "./Navbar";
 
 export default function Game() {
   const [history, setHistory] = useState<Array<(string | null)[]>>([

@@ -22,26 +22,69 @@ export default function Game() {
     setCurrentMove(nextMove);
   }
 
-  const moves = history.map((_squares, move) => {
-    const description = move ? `Go to move #${move}` : "Go to game start";
+  const startButton = (
+    <div className="start-game-container">
+      <button
+        className="history-button start-button"
+        onClick={() => {
+          if (currentMove === 0) {
+            jumpTo(0); // just start
+          } else {
+            // restart game: clear history and reset move
+            setHistory([Array(9).fill(null)]);
+            setCurrentMove(0);
+          }
+        }}
+      >
+        {currentMove === 0 ? "Start Game" : "Restart Game"}
+      </button>
+    </div>
+  );
+
+ const moves = history
+  .slice(1) 
+  .map((_, move) => {
+    const moveNumber = move + 1; // adjust index
     return (
-      <li key={move}>
-        <button onClick={() => jumpTo(move)}>{description}</button>
+      <li key={moveNumber}>
+        <button
+          className="history-button"
+          onClick={() => jumpTo(moveNumber)}
+        >
+          Go to move #{moveNumber}
+        </button>
       </li>
     );
   });
 
   return (
-     <div className={`game ${theme}`}>
-      <Navbar theme={theme} onToggle={() => setTheme(theme === "light" ? "dark" : "light")} />
+  <div className={`game ${theme}`}>
+    <Navbar
+      theme={theme}
+      onToggle={() => setTheme(theme === "light" ? "dark" : "light")}
+    />
 
-      <div className="game-board">
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} theme={theme}/>
+      <div className="game-container">
+        <div className="game-board">   
+        <Board
+          xIsNext={xIsNext}
+          squares={currentSquares}
+          onPlay={handlePlay}
+          theme={theme}
+          />
+           {startButton}
       </div>
-      <div className={`game-info mt-4 p-2 rounded-md ${
-        theme === "dark" ? "bg-gray-800 text-white" : "bg-gray-200 text-black"}`}>
+      <div
+        className={`game-info ${
+          theme === "dark"
+            ? "bg-gray-800 text-white"
+            : "bg-gray-200 text-black"
+        }`}
+        >
+          <h3 className="history-title mb-2 font-bold text-center">History</h3>
         <ol>{moves}</ol>
       </div>
     </div>
-  );
+  </div>
+);
 }

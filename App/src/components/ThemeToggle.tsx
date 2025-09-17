@@ -7,11 +7,13 @@ interface ThemeToggleProps {
 
 export default function ThemeToggle({ theme, onToggle }: ThemeToggleProps) {
   return (
-    <div className="theme-toggle">
-      <button onClick={onToggle}>
-        Switch to {theme === "light" ? "Dark" : "Light"} Mode
-      </button>
-    </div>
+    <button
+      onClick={onToggle}
+      className={`w-6 h-6 rounded-full border-2 transition ${
+        theme === "light"
+          ? "bg-white border-gray-400"
+          : "bg-black border-gray-600"
+      }`}
+    />
   );
 }
-

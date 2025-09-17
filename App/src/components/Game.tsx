@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import Board from "./Board";
+import Navbar from "./Navbar";
 
 export default function Game() {
   const [history, setHistory] = useState<Array<(string | null)[]>>([
     Array(9).fill(null),
   ]);
   const [currentMove, setCurrentMove] = useState(0);
+  const [theme, setTheme] = useState("light");
 
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
@@ -30,11 +32,14 @@ export default function Game() {
   });
 
   return (
-    <div className="game">
+     <div className={`game ${theme}`}>
+      <Navbar theme={theme} onToggle={() => setTheme(theme === "light" ? "dark" : "light")} />
+
       <div className="game-board">
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} theme={theme}/>
       </div>
-      <div className="game-info">
+      <div className={`game-info mt-4 p-2 rounded-md ${
+        theme === "dark" ? "bg-gray-800 text-white" : "bg-gray-200 text-black"}`}>
         <ol>{moves}</ol>
       </div>
     </div>
